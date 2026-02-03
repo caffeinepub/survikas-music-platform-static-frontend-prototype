@@ -1,0 +1,69 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-playable-audio-sources-to-the-existing-mock-track-data-so-that-at-least-the-home-page-trending-tracks-and-artist-profile-popular-tracks-have-audiosrc-values-that-point-to-audio-files-in-frontend-public-assets-e-g-mp3",
+      "featureTitle": "Add playable audio sources to the existing mock track data so that at least the Home page trending tracks and Artist profile popular tracks have `audioSrc` values that point to audio files in `frontend/public/assets/` (e.g., `.mp3`).",
+      "files": [
+        "frontend/src/data/artistContent.ts",
+        "frontend/src/data/homeContent.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "blob-storage@4.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-make-the-play-buttons-on-track-cards-actually-start-playback-when-a-user-clicks-the-play-overlay-on-a-home-page-trending-track-card-or-an-artist-profile-track-row-the-ui-must-open-an-audio-playback-ui-using-the-existing-frontend-src-components-audioplayer-tsx-component-and-start-playing-the-selected-track-s-audiosrc-when-available",
+      "featureTitle": "Make the Play buttons on track cards actually start playback: when a user clicks the Play overlay on a Home page trending track card or an Artist profile track row, the UI must open an audio playback UI using the existing `frontend/src/components/AudioPlayer.tsx` component and start playing the selected track’s `audioSrc` when available.",
+      "files": [
+        "frontend/src/components/AudioPlayer.tsx",
+        "frontend/src/components/Layout.tsx",
+        "frontend/src/context/PlaybackContext.tsx",
+        "frontend/src/pages/ArtistProfilePage.tsx",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "blob-storage@4.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-only-one-track-plays-at-a-time-across-the-app-starting-playback-for-a-new-track-must-stop-pause-any-currently-playing-track-opened-from-these-track-lists",
+      "featureTitle": "Ensure only one track plays at a time across the app: starting playback for a new track must stop/pause any currently playing track opened from these track lists.",
+      "files": [
+        "frontend/src/components/AudioPlayer.tsx",
+        "frontend/src/components/Layout.tsx",
+        "frontend/src/context/PlaybackContext.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "blob-storage@4.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

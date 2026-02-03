@@ -1,0 +1,74 @@
+{
+  "kind": "build_request",
+  "title": "Enable playable songs in track lists",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Add playable audio sources to the existing mock track data so that at least the Home page trending tracks and Artist profile popular tracks have `audioSrc` values that point to audio files in `frontend/public/assets/` (e.g., `.mp3`).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "I wanna add song for playing"
+        ]
+      },
+      "acceptanceCriteria": [
+        "`frontend/src/data/homeContent.ts` trending track items include `audioSrc` for at least 1–3 tracks.",
+        "`frontend/src/data/artistContent.ts` track items include `audioSrc` for at least 1–3 tracks.",
+        "All referenced `audioSrc` paths resolve to files under `frontend/public/assets/` and load successfully in the browser (no 404)."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Make the Play buttons on track cards actually start playback: when a user clicks the Play overlay on a Home page trending track card or an Artist profile track row, the UI must open an audio playback UI using the existing `frontend/src/components/AudioPlayer.tsx` component and start playing the selected track’s `audioSrc` when available.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "I wanna add song for playing"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking Play on a trending track starts playback for that track (when `audioSrc` is present).",
+        "Clicking Play on an artist’s popular track starts playback for that track (when `audioSrc` is present).",
+        "If a track has no `audioSrc`, the UI clearly indicates audio is not available (reusing the existing AudioPlayer fallback behavior is acceptable)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Ensure only one track plays at a time across the app: starting playback for a new track must stop/pause any currently playing track opened from these track lists.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "I wanna add song for playing"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When a second track is played, the previously playing track is paused/stopped.",
+        "There is no overlapping audio from multiple AudioPlayer instances."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify files under frontend/src/components/ui (shadcn components are read-only).",
+    "Do not modify frontend/src/hooks/useInternetIdentity.ts(x), frontend/src/hooks/useActor.ts, or frontend/src/main.tsx (immutable paths).",
+    "Keep the backend as-is (no new backend logic required for this change)."
+  ],
+  "nonGoals": [
+    "Implementing real uploads or storing audio on the backend canister.",
+    "Adding likes/follow/share functionality beyond existing static UI.",
+    "Streaming, DRM, or advanced audio processing features."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}
