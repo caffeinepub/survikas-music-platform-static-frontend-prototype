@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 7,
+  "summary": "Survikas is a static frontend prototype of a community-driven music platform. The UI demonstrates discovery (featured artists and trending tracks), artist profile pages, competitions with leaderboards, an upload flow (disabled/static), a user profile with track playback, and a rewards/achievements section. The codebase also contains ICP/DFINITY-oriented hooks for Internet Identity authentication and actor creation, plus Motoko modules for blob-storage maintenance/authorization, though the main backend canister is intentionally empty for the prototype.",
+  "existing_features": [
+    {
+      "id": "IF-1",
+      "title": "Client-side routing with multi-page navigation",
+      "synonyms": [
+        "TanStack Router navigation",
+        "SPA routes"
+      ],
+      "description": "Defines routes for Discover/Home, Competitions, Upload, Profile, Rewards, and Artist Profile (parameterized by artistId) using TanStack Router. Navigation is driven via useNavigate and route definitions in App.tsx.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-2",
+      "title": "Global application layout with responsive header and mobile bottom nav",
+      "synonyms": [
+        "Layout shell",
+        "Navigation bar"
+      ],
+      "description": "Provides a consistent UI frame with a sticky header, desktop navigation buttons, a mobile bottom navigation bar, and a footer. Highlights the active route using router state.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-3",
+      "title": "Theme system and dark mode support",
+      "synonyms": [
+        "next-themes",
+        "Tailwind theme variables"
+      ],
+      "description": "Implements class-based theming via ThemeProvider and Tailwind CSS variables (OKLCH-based palettes) to support light/dark modes and consistent styling across the UI.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-4",
+      "title": "Discover/Home page with hero, featured artists, and trending tracks",
+      "synonyms": [
+        "Homepage",
+        "Discovery feed"
+      ],
+      "description": "Displays a hero banner with primary calls-to-action, a grid of featured artists (clickable cards navigating to artist profiles), and a grid of trending track cards with hover play/like UI elements.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-5",
+      "title": "Artist profile page with popular tracks and stats",
+      "synonyms": [
+        "Artist details",
+        "Artist page"
+      ],
+      "description": "Shows artist header (avatar, genre badge, follower count, bio), a popular tracks list with hover play UI, and computed stats including track count, total plays, and followers. Handles missing artist IDs with a fallback screen.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-6",
+      "title": "Competitions page with active competitions, leaderboard, and rules",
+      "synonyms": [
+        "Challenges page",
+        "Leaderboard view"
+      ],
+      "description": "Renders active competition cards (category, status, prize, participants, deadline) with join buttons, a leaderboard table with rank and trend indicators, and a 'How It Works' section describing the process.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-7",
+      "title": "Upload page UI with guidelines, track metadata form, and tips (static)",
+      "synonyms": [
+        "Track submission form",
+        "Upload flow mock"
+      ],
+      "description": "Provides a comprehensive upload form UI (audio file, cover art, title, description, genre, competition selection, tags) plus guidelines and tips; inputs and actions are disabled to reflect static prototype behavior.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-8",
+      "title": "User profile page with tabs (tracks, following, followers)",
+      "synonyms": [
+        "Account profile",
+        "My profile"
+      ],
+      "description": "Displays profile header information and stats, plus a tabbed interface showing: (1) user tracks using the AudioPlayer component, (2) following list with unfollow UI, and (3) followers list with follow-back UI.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-9",
+      "title": "Audio playback component with seek and fallback source handling",
+      "synonyms": [
+        "Inline audio player",
+        "Track preview player"
+      ],
+      "description": "Reusable AudioPlayer component supports play/pause, time display, seeking with a range input, metadata duration handling, graceful 'no preview' state, and automatic fallback audio source on load/playback error.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-10",
+      "title": "Rewards and achievements UI (points, badges, redemption, activity)",
+      "synonyms": [
+        "Achievements page",
+        "Rewards store mock"
+      ],
+      "description": "Shows points balance with milestone progress, quick stats, achievement badges with earned/progress states, a redeemable rewards catalog with affordability gating, and a transaction/activity feed.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-11",
+      "title": "Internet Identity authentication context (login/logout + persistence)",
+      "synonyms": [
+        "II auth",
+        "AuthClient provider"
+      ],
+      "description": "Provides an InternetIdentityProvider using @dfinity/auth-client that initializes from stored sessions, exposes login/logout methods, tracks login status, and keeps the current Identity in React context.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-12",
+      "title": "ICP canister actor creation hook with React Query caching",
+      "synonyms": [
+        "useActor",
+        "Actor factory hook"
+      ],
+      "description": "Creates an authenticated or anonymous canister actor based on the current Internet Identity, caches it with React Query (keyed by principal), and invalidates/refetches dependent queries when the actor changes.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-13",
+      "title": "Motoko blob-storage maintenance utilities (authorization, GC, cashier top-ups)",
+      "synonyms": [
+        "Storage mixin",
+        "Blob lifecycle management"
+      ],
+      "description": "Implements storage helper modules: loads a cashier principal from an environment variable, refreshes authorized gateway principals via a cashier canister call, checks authorization, tops up the cashier with available cycles, lists dead blobs for deletion, confirms deletion and triggers GC, and returns a simple upload certificate payload.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-14",
+      "title": "Backend canister placeholder",
+      "synonyms": [
+        "Empty backend",
+        "Static-only backend"
+      ],
+      "description": "Defines an intentionally empty main backend actor, consistent with the app being a static-only prototype without backend logic.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-15",
+      "title": "ICP-focused build/deploy template scaffolding (frontend + backend)",
+      "synonyms": [
+        "build-template",
+        "ICP app scaffold",
+        "deploy.sh + icp.yaml"
+      ],
+      "description": "Adds/updates a reusable build-template setup including Dockerfile, deploy script, canister.yaml definitions for frontend/backend, workspace/package configuration, and helper scripts (e.g., image resize/pruning) to standardize building and deploying the prototype for ICP environments.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-16",
+      "title": "Frontend lint rules for ICP/Internet Identity integration",
+      "synonyms": [
+        "custom ESLint rules",
+        "require-internet-identity-provider",
+        "no-bigint-in-query-keys"
+      ],
+      "description": "Introduces custom ESLint rules to enforce InternetIdentityProvider usage patterns and to prevent problematic BigInt values in React Query keys, aligning frontend code quality with ICP integration constraints.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "feature-add-playable-audio-sources-to-the-existing-mock-track-data-so-that-at-least-the-home-page-trending-tracks-and-artist-profile-popular-tracks-have-audiosrc-values-that-point-to-audio-files-in-frontend-public-assets-e-g-mp3",
+      "title": "Add playable audio sources to the existing mock track data so that at least the Home page trending tracks and Artist profile popular tracks have `audioSrc` values that point to audio files in `frontend/public/assets/` (e.g., `.mp3`).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-play-buttons-on-track-cards-actually-start-playback-when-a-user-clicks-the-play-overlay-on-a-home-page-trending-track-card-or-an-artist-profile-track-row-the-ui-must-open-an-audio-playback-ui-using-the-existing-frontend-src-components-audioplayer-tsx-component-and-start-playing-the-selected-track-s-audiosrc-when-available",
+      "title": "Make the Play buttons on track cards actually start playback: when a user clicks the Play overlay on a Home page trending track card or an Artist profile track row, the UI must open an audio playback UI using the existing `frontend/src/components/AudioPlayer.tsx` component and start playing the selected track’s `audioSrc` when available.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-only-one-track-plays-at-a-time-across-the-app-starting-playback-for-a-new-track-must-stop-pause-any-currently-playing-track-opened-from-these-track-lists",
+      "title": "Ensure only one track plays at a time across the app: starting playback for a new track must stop/pause any currently playing track opened from these track lists.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Enable playable audio for songs/tracks in the UI prototype (user can play their songs from track cards/players).",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "architecturalNotes": [
+    "React SPA using TanStack Router for client-side routing (routes: home, competitions, upload, profile, rewards, artist profile).",
+    "App-wide layout wrapper (header + desktop nav, mobile bottom nav, footer) implemented as the root route component with <Outlet /> for nested routes.",
+    "Tailwind CSS with CSS variable (OKLCH) theming; dark mode handled via next-themes (ThemeProvider with class-based toggling).",
+    "UI composed primarily of shadcn-style components (Card, Button, Badge, Tabs, Table, Avatar, Progress, Alert) with lucide-react icons.",
+    "Static prototype data model: pages render from hard-coded arrays/records (artists, tracks, competitions, leaderboard, rewards, etc.).",
+    "React Query is set up globally (QueryClientProvider). A custom useActor hook uses React Query to memoize an ICP canister actor per identity and forces dependent query refresh on identity changes.",
+    "Internet Identity integration is encapsulated in a context provider hook (InternetIdentityProvider) that loads persisted identity and exposes login/logout state.",
+    "Backend includes a Motoko 'mixin' module pattern for adding blob-storage maintenance endpoints (authorization list refresh, dead blob pruning, cashier cycle top-ups) using env-var configuration and system primitives.",
+    "Repository now includes a build-template scaffold (workspace configs, Dockerfile, deploy.sh, icp.yaml, canister.yaml files) to standardize packaging and deployment for ICP.",
+    "Frontend adds custom ESLint rules focused on ICP constraints (e.g., prohibiting BigInt in React Query keys; enforcing InternetIdentityProvider usage)."
+  ],
+  "knownIssues": [
+    "Prototype is largely static: no real backend integration for discovery, competitions, follow/unfollow, likes, sharing, uploads, rewards redemption, or leaderboards (most buttons are non-functional UI only).",
+    "frontend/src/hooks/useQueries.ts is an intentionally empty placeholder, indicating missing data-fetching layer for real integration.",
+    "Upload page form is fully disabled (intended as a UI mock).",
+    "Backend main.mo is intentionally empty; any real application logic is not implemented.",
+    "Duplicate/competing global stylesheet files exist (frontend/src/index.css and frontend/index.css) with different variable sets; only one is likely intended, but this can confuse maintenance.",
+    "Artist total-plays calculation in ArtistProfilePage parses play counts assuming an 'M' suffix; other formats (e.g., 'K') would be incorrect.",
+    "AudioPlayer toggles play state optimistically without awaiting/handling the promise from audio.play(); playback failures could desync UI state from actual audio state.",
+    "Motoko Storage.isAuthorized uses 'registry.authorizedPrincipals.find(...)' as if arrays have a .find method; depending on the Motoko core library version, this may not compile and may need Array.find.",
+    "Motoko refillCashier subtracts a reserved cycle amount using Nat.sub; if balance is below the reserve, this can trap."
+  ],
+  "isFixRequest": false,
+  "gameProjectType": "none",
+  "projectName": "Survikas Music Platform (Static Frontend Prototype)",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0,
+  "requiresBackendChanges": false,
+  "requiresFrontendChanges": true
+}

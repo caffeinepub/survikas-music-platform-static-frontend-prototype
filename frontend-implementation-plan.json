@@ -1,0 +1,94 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Enable playable songs in track lists",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Add audioSrc values to mock track data and ensure referenced audio files exist under frontend/public/assets/.",
+      "acceptanceCriteria": [
+        "`frontend/src/data/homeContent.ts` trending track items include `audioSrc` for at least 1–3 tracks.",
+        "`frontend/src/data/artistContent.ts` track items include `audioSrc` for at least 1–3 tracks.",
+        "All referenced `audioSrc` paths resolve to files under `frontend/public/assets/` and load successfully in the browser (no 404)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/data/homeContent.ts",
+          "operation": "modify",
+          "description": "Add `audioSrc` (and optionally `fallbackSrc`) to 1–3 items in `trendingTracks`, pointing to audio files under `frontend/public/assets/` (e.g., `/assets/Chahun_main_ya_na.mp3`)."
+        },
+        {
+          "path": "frontend/src/data/artistContent.ts",
+          "operation": "modify",
+          "description": "Add `audioSrc` (and optionally `fallbackSrc`) to 1–3 artist `tracks` items (at minimum for the Artist profile popular tracks list), pointing to audio files under `frontend/public/assets/`."
+        },
+        {
+          "path": "frontend/public/assets/Chahun_main_ya_na.mp3",
+          "operation": "create",
+          "description": "Ensure this audio file exists at this exact path so `audioSrc: '/assets/Chahun_main_ya_na.mp3'` loads successfully (copy/commit the provided mp3 into `frontend/public/assets/`)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Wire track Play buttons to open the AudioPlayer UI and start playback for the selected track when audioSrc is available.",
+      "acceptanceCriteria": [
+        "Clicking Play on a trending track starts playback for that track (when `audioSrc` is present).",
+        "Clicking Play on an artist’s popular track starts playback for that track (when `audioSrc` is present).",
+        "If a track has no `audioSrc`, the UI clearly indicates audio is not available (reusing the existing AudioPlayer fallback behavior is acceptable)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/context/PlaybackContext.tsx",
+          "operation": "create",
+          "description": "Create a lightweight playback context/provider that stores the currently selected track metadata for playback and exposes actions like `playTrack(...)` and `closePlayer()` for pages to open the global AudioPlayer."
+        },
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "modify",
+          "description": "Wrap routed content with the Playback provider and render a single global `AudioPlayer` UI when a track is selected so Home/Artist Play clicks can open it and show fallback UI when `audioSrc` is missing."
+        },
+        {
+          "path": "frontend/src/components/AudioPlayer.tsx",
+          "operation": "modify",
+          "description": "Enhance the existing AudioPlayer to support starting playback immediately when a new selected track is set (e.g., respond to audioSrc/title changes, reset internal state, and optionally auto-play)."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Update the Trending Tracks Play overlay button to call the playback context `playTrack(...)` with the clicked track so the global AudioPlayer opens and starts playback when `audioSrc` is available."
+        },
+        {
+          "path": "frontend/src/pages/ArtistProfilePage.tsx",
+          "operation": "modify",
+          "description": "Update each Popular Tracks row Play overlay button to call the playback context `playTrack(...)` (including artist name where needed) so the global AudioPlayer opens and starts playback when `audioSrc` is available."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Ensure only one audio source plays at a time by centralizing playback into a single AudioPlayer instance shared across track lists.",
+      "acceptanceCriteria": [
+        "When a second track is played, the previously playing track is paused/stopped.",
+        "There is no overlapping audio from multiple AudioPlayer instances."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/context/PlaybackContext.tsx",
+          "operation": "modify",
+          "description": "Ensure playback state is singleton (one 'current track' at a time) so new `playTrack(...)` calls replace the existing selection rather than creating multiple players."
+        },
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "modify",
+          "description": "Render exactly one AudioPlayer instance at the app layout level (not per card/row) so overlapping instances cannot occur."
+        },
+        {
+          "path": "frontend/src/components/AudioPlayer.tsx",
+          "operation": "modify",
+          "description": "On track change, explicitly pause/stop the currently playing audio element before loading/playing the new source to prevent overlapping audio."
+        }
+      ]
+    }
+  ]
+}

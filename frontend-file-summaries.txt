@@ -1,0 +1,21 @@
+{
+  "frontend/src/App.tsx": "Main application component with TanStack Router setup, defining all routes (home, competitions, upload, profile, rewards, artist profile) and wrapping the app with ThemeProvider for dark mode support.",
+  "frontend/src/components/Layout.tsx": "Layout component with header navigation, mobile bottom nav, footer, and a global AudioPlayer that appears when a track is selected via the PlaybackContext.",
+  "frontend/src/pages/HomePage.tsx": "Home page component with featured artists and trending tracks sections, wired to open the global AudioPlayer via PlaybackContext when play buttons are clicked.",
+  "frontend/src/pages/CompetitionsPage.tsx": "Competitions page component now importing competitions and leaderboard data from centralized competitionsContent module instead of inline definitions.",
+  "frontend/src/pages/UploadPage.tsx": "Upload page with a comprehensive form for track submission including file uploads, metadata inputs, genre selection, and upload guidelines (all disabled as static prototype).",
+  "frontend/src/pages/ProfilePage.tsx": "User profile page component importing user profile, tracks, following, and followers data from centralized profileContent module with fallback values for optional track properties when passing to AudioPlayer.",
+  "frontend/src/pages/RewardsPage.tsx": "Rewards page component now importing badges, transactions, rewards, and points data from centralized rewardsContent module with icon mapping for lucide-react icons.",
+  "frontend/src/pages/ArtistProfilePage.tsx": "Artist profile page component with bio, popular tracks list, and stats sections, wired to open the global AudioPlayer via PlaybackContext when track play buttons are clicked.",
+  "frontend/src/index.css": "Global styles with custom OKLCH color system featuring purple/pink gradient theme optimized for a vibrant music platform aesthetic in both light and dark modes.",
+  "frontend/src/hooks/useQueries.ts": "Empty placeholder file as this is a static prototype with no backend integration.",
+  "frontend/src/components/AudioPlayer.tsx": "Reusable audio player component with play/pause controls, seek bar, time display, auto-play on track change, and fallback audio source support.",
+  "frontend/src/data/types.ts": "Shared TypeScript type definitions for all entities in the music platform prototype (Artist, Track, Competition, LeaderboardEntry, Reward, Badge, Transaction, UserProfile, etc.).",
+  "frontend/src/data/homeContent.ts": "Centralized mock content for HomePage including featuredArtists and trendingTracks arrays with audioSrc added to 3 trending tracks.",
+  "frontend/src/data/artistContent.ts": "Centralized artist profile data keyed by artistId with audioSrc added to tracks for multiple artists including Omkar Jambhale and Shivam Waswani.",
+  "frontend/src/data/competitionsContent.ts": "Centralized competition and leaderboard data including active competitions array and leaderboard entries for the featured competition.",
+  "frontend/src/data/profileContent.ts": "Centralized user profile content including userProfile info, userTracks with audio support and required duration/likes/uploadDate fields, following artists list, and followers list.",
+  "frontend/src/data/rewardsContent.ts": "Centralized rewards page content including badges, transactions, redeemable rewards with icon keys, and points balance data.",
+  "frontend/EDITING_GUIDE.md": "Comprehensive English editing guide explaining where to edit centralized content, asset locations, and concrete examples for common editing tasks like changing featured artists, tracks, and artist profiles.",
+  "frontend/src/context/PlaybackContext.tsx": "React context provider that manages global playback state with a single current track and actions to play tracks or close the player."
+}
